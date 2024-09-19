@@ -100,7 +100,7 @@ body {
   }
 
   .flex-between {
-    @apply flex justify-between items-center gap-5;
+    @apply flex justify-between items-center ;
   }
 
   /* TYPOGRAPHY */
