@@ -82,11 +82,18 @@ body {
     hue-rotate(32deg) brightness(98%) contrast(92%);
 }
 
+.gradient-text {
+  background: linear-gradient(90deg, #FF5733, #C70039);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
 /* ========================================== TAILWIND STYLES */
 @layer utilities {
   .wrapper {
     @apply max-w-7xl lg:mx-auto p-5 md:px-10 xl:px-0 w-full;
   }
+
 
   .flex-center {
     @apply flex justify-center items-center;
