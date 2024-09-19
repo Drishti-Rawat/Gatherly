@@ -8,9 +8,6 @@ const NavItems = () => {
     
     const [Active,setIsActive]= useState("Home")
 
-    const handleSetActive = (tab:any) => {
-        setIsActive(tab);
-      };
   return (
     <ul className="md:flex-between flex w-full flex-col items-start gap-5 md:flex-row">
         {
