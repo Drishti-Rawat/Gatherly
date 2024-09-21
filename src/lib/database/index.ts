@@ -2,13 +2,7 @@ import mongoose from "mongoose";
 
 const MONGO_URI = process.env.MONGO_URI;
 
-interface MongooseCache {
-    conn: typeof mongoose | null;
-    promise: Promise<typeof mongoose> | null;
-  }
-  
-
-const cached:MongooseCache =(global as any).mongoose|| {conn:null, promise:null};
+const cached =(global as any).mongoose|| {conn:null, promise:null};
 
 export const connectToDatabase = async ()=>{
     if(cached.conn) return cached.conn;
@@ -22,6 +16,9 @@ export const connectToDatabase = async ()=>{
    })
 
    cached.conn=await cached.promise
+   console.log("database connected successfully")
    return cached.conn;
+
+   
    
 }

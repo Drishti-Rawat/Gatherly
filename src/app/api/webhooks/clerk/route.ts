@@ -1,7 +1,7 @@
 import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { clerkClient, WebhookEvent } from "@clerk/nextjs/server";
-import { createUser, deleteUser, updateUser} from "@/lib/actions/user.actions";
+import { createUser, deleteUser, updateUser } from "@/lib/actions/user.actions";
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
@@ -52,12 +52,12 @@ export async function POST(req: Request) {
   // Do something with the payload
   // For this guide, you simply log the payload to the console
   const { id } = evt.data;
-  console.log(id)
+  // console.log(id)
   const eventType = evt.type;
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, first_name, last_name, username } =
       evt.data;
-
+    console.log("Received user.created event:", evt.data);
     const user = {
       clerkId: id,
       email: email_addresses[0].email_address,
@@ -68,6 +68,7 @@ export async function POST(req: Request) {
     };
 
     const newUser = await createUser(user);
+    console.log("User created in database:", newUser);
 
     if (newUser) {
       await clerkClient.users.updateUserMetadata(id, {
@@ -75,6 +76,7 @@ export async function POST(req: Request) {
           userid: newUser._id,
         },
       });
+      console.log("Clerk user metadata updated");
     }
 
     return Response.json(
@@ -89,31 +91,43 @@ export async function POST(req: Request) {
   }
 
   if (eventType === "user.updated") {
-    const { id, image_url, first_name, last_name, username } = evt.data;
+    try {
+      const { id, image_url, first_name, last_name, username } = evt.data;
+      console.log("Received user.created event:", evt.data);
 
-    const user = {
-      username: username!,
-      firstName: first_name!,
-      lastName: last_name!,
-      photo: image_url,
-    };
+      const user = {
+        username: username!,
+        firstName: first_name!,
+        lastName: last_name!,
+        photo: image_url,
+      };
 
-    const updatedUser = await updateUser(id, user);
+      const updatedUser = await updateUser(id, user);
 
-    return Response.json(
-      {
-        message: "User updated",
-        user: updatedUser,
-      },
-      {
-        status: 200,
-      }
-    );
+      return Response.json(
+        {
+          message: "User updated",
+          user: updatedUser,
+        },
+        {
+          status: 200,
+        }
+      );
+    } catch (error) {
+      console.error("Error handling user.created event:", error);
+      return Response.json(
+        {
+          message: "Error creating user",
+          error: error instanceof Error ? error.message : String(error),
+        },
+        { status: 500 }
+      );
+    }
   }
 
-  if(eventType === "user.deleted") {
-    const {id} = evt.data
-    const deltedUser = await deleteUser(id!)
+  if (eventType === "user.deleted") {
+    const { id } = evt.data;
+    const deltedUser = await deleteUser(id!);
     return Response.json(
       {
         message: "User deleted",
