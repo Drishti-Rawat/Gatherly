@@ -8,7 +8,7 @@ interface MongooseCache {
   }
   
 
-let cached:MongooseCache =(global as any).mongoose|| {conn:null, promise:null};
+const cached:MongooseCache =(global as any).mongoose|| {conn:null, promise:null};
 
 export const connectToDatabase = async ()=>{
     if(cached.conn) return cached.conn;
