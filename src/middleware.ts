@@ -4,8 +4,8 @@ import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 const publicRoutes = [
   '/',
   '/events/:id',
-  '/api/webhook/clerk',
-  '/api/webhook/stripe',
+  '/api/webhooks/clerk',
+  '/api/webhooks/stripe',
   '/api/uploadthing',
 '/sign-in(.*)',  // This will match all routes under /sign-in
   '/sign-up(.*)' 
