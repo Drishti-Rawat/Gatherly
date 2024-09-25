@@ -4,7 +4,6 @@ import { CreateEventParams } from "@/types";
 import { handleError } from "../utils";
 import { connectToDatabase } from "../database";
 import User from "../database/models/user.model";
-import Category from "../database/models/category.model";
 import Event from "../database/models/event.model";
 
 export const createEvent = async ({
@@ -15,6 +14,7 @@ export const createEvent = async ({
   try {
     await connectToDatabase();
     const organizer = await User.findById(userId);
+    console.log(path);
 
     if (!organizer) {
       throw new Error("Organizer not found");

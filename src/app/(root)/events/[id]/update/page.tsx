@@ -4,7 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 
 const UpdateEventPage = () => {
     const {sessionClaims} = auth()
-    const userId = sessionClaims?.user_id as String;
+    const userId = sessionClaims?.user_id as string;
     console.log(userId)
   return (
     <>
@@ -15,7 +15,7 @@ const UpdateEventPage = () => {
     </section>
 
     <div className="wrapper my-8">
-      <EventForm userId={userId} type="update"/>
+      <EventForm userId={userId} type="Update"/>
     </div>
   </>
   )
