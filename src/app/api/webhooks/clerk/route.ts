@@ -2,6 +2,7 @@ import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { clerkClient, WebhookEvent } from "@clerk/nextjs/server";
 import { createUser, deleteUser, updateUser } from "@/lib/actions/user.actions";
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the endpoint
@@ -79,7 +80,7 @@ export async function POST(req: Request) {
       console.log("Clerk user metadata updated");
     }
 
-    return Response.json(
+    return NextResponse.json(
       {
         message: "User created",
         user: newUser,
@@ -104,7 +105,7 @@ export async function POST(req: Request) {
 
       const updatedUser = await updateUser(id, user);
 
-      return Response.json(
+      return NextResponse.json(
         {
           message: "User updated",
           user: updatedUser,
@@ -115,7 +116,7 @@ export async function POST(req: Request) {
       );
     } catch (error) {
       console.error("Error handling user.created event:", error);
-      return Response.json(
+      return NextResponse.json(
         {
           message: "Error creating user",
           error: error instanceof Error ? error.message : String(error),
@@ -128,7 +129,7 @@ export async function POST(req: Request) {
   if (eventType === "user.deleted") {
     const { id } = evt.data;
     const deltedUser = await deleteUser(id!);
-    return Response.json(
+    return NextResponse.json(
       {
         message: "User deleted",
         user: deltedUser,
