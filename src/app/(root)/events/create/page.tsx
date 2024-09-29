@@ -7,7 +7,9 @@ import React from "react";
 const CreateEventPage = () => {
 
   // to get the seesion data
+
   const {sessionClaims} = auth()
+  console.log(sessionClaims)
   // const userId = sessionClaims?.user_id as string;
   const userId = sessionClaims?.userid as string;
   

@@ -28,16 +28,7 @@ type DropdownProps = {
 };
 
 const Dropdown = ({ onChangeHandler, value }: DropdownProps) => {
-  const [categories, setCategories] = useState<ICategory[]>([
-    {
-      _id: "1",
-      name: "cat 1",
-    },
-    {
-      _id: "2",
-      name: "cat 2",
-    },
-  ]);
+  const [categories, setCategories] = useState<ICategory[]>([]);
 
   const [newCategory, setNewCategory] = useState('');
 
@@ -51,7 +42,7 @@ const Dropdown = ({ onChangeHandler, value }: DropdownProps) => {
     const fetchCategories = async () => {
       const categoryList = await FtechCategories();
       categoryList && setCategories(categoryList as ICategory[]);
-      console.log(categoryList);
+      // console.log(categoryList);
     };
     fetchCategories();
   },[newCategory]);
