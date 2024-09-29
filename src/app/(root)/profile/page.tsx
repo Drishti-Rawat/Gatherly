@@ -1,6 +1,6 @@
 import CollectionEvents from '@/components/Shared/CollectionEvents'
 import { Button } from '@/components/ui/button'
-import { getAllEvents, getEventByUser } from '@/lib/actions/Event.action'
+import {  getEventByUser } from '@/lib/actions/Event.action'
 import { auth } from '@clerk/nextjs/server'
 import Link from 'next/link'
 import React from 'react'

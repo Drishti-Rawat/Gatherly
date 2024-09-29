@@ -25,7 +25,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useRouter } from "next/navigation";
 import { createEvent, UpdateEvent } from "@/lib/actions/Event.action";
 import { Ievent } from "@/lib/database/models/event.model";
-import { updateUser } from "@/lib/actions/user.actions";
 
 type EventFormProps = {
   userId: string;

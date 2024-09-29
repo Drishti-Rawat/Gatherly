@@ -17,7 +17,7 @@ import { usePathname } from 'next/navigation'
 
 const DeleteConfirmation = ({eventId }: {eventId: string}) => {
     const pathname = usePathname()
-    const [isPending , setISpending] = useTransition()
+    const [isPending , startTransition] = useTransition()
   return (
     <AlertDialog>
   <AlertDialogTrigger  >

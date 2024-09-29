@@ -1,4 +1,4 @@
-import { CheckoutOrderParams } from '@/types'
+
 import React, { useEffect } from 'react'
 import { Button } from '../ui/button'
 import { Ievent } from '@/lib/database/models/event.model'

@@ -24,6 +24,7 @@ const CollectionEvents = ({
     totalPages=0,
     urlParamName
 }: CollectionProps) => {
+  console.log(limit,page,totalPages,urlParamName)
 
   
   return (

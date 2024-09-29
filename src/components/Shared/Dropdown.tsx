@@ -45,7 +45,7 @@ const Dropdown = ({ onChangeHandler, value }: DropdownProps) => {
       // console.log(categoryList);
     };
     fetchCategories();
-  },[newCategory]);
+  },[]);
   
   return (
     <Select onValueChange={onChangeHandler} defaultValue={value}>
