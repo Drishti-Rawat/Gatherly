@@ -6,7 +6,8 @@ export interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
    // This empty interface is intentionally left blank.
   // It's a common pattern in shadcn components to allow for future extensions
-  // without breaking changes.
+  // without breaking changes
+  _?: never
   }
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(

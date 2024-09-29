@@ -3,9 +3,13 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 
+
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
-    // @ts-ignore
+    // This empty interface is intentionally left blank.
+  // It's a common pattern in shadcn components to allow for future extensions
+  // without breaking changes.
+  _?: never
   }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
