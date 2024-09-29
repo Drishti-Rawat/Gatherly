@@ -50,6 +50,10 @@ const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
     getCategories();
   }, [])
 
+  const handleClick = () => {
+    startTransition(handleAddCategory);
+  };
+
   return (
     <Select onValueChange={onChangeHandler} defaultValue={value}>
       <SelectTrigger className="select-field">
@@ -73,9 +77,7 @@ const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={() => 
-              // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-                 startTransition(handleAddCategory)}>Add</AlertDialogAction>
+              <AlertDialogAction onClick={handleClick}>Add</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
