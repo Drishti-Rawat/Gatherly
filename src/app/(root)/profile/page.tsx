@@ -1,16 +1,26 @@
 import CollectionEvents from '@/components/Shared/CollectionEvents'
 import { Button } from '@/components/ui/button'
 import {  getEventByUser } from '@/lib/actions/Event.action'
+import { getOrdersByUser } from '@/lib/actions/Order.action'
+import { IOrder } from '@/lib/database/models/order.model'
+import { SearchParamProps } from '@/types'
 import { auth } from '@clerk/nextjs/server'
 import Link from 'next/link'
 import React from 'react'
 
-const ProfilePage = async() => {
+const ProfilePage = async({searchParams}:SearchParamProps) => {
     const {sessionClaims} = auth()
     const userId = sessionClaims?.userid as string;
 
+    const ordersPage = Number(searchParams?.ordersPage || 1);
+    const eventsPage = Number(searchParams?.eventsPage || 1);
+
     const EventsOrganized = await getEventByUser({userId,page:1})
     // console.log("EventsOrganized",EventsOrganized)
+
+    const orders = await getOrdersByUser({userId,page:1})
+    const orderEvent = orders?.data.map((order:IOrder)=>order.event)||[]
+    console.log("orderEvent",orderEvent)
   return (
     <>
     {/* my tickets */}
@@ -25,20 +35,20 @@ const ProfilePage = async() => {
 
     </section>
     {/* my events */}
-    {/* <section className='wrapper my-8'>
+    <section className='wrapper my-8'>
     <CollectionEvents
-        data = {All_events?.data}
+        data = {orderEvent}
         emptyTitles= "No events tickets Purcahed. "
         emptyStateSubText = "No worries! plenty of exiciting evnts to get you started. "
         collectionTitle = "My_Tickets"
         limit= {3}
-        page={1}
-        totalPages={2}
-        urlParamName='orderPage'
+        page={ordersPage}
+        totalPages={orders?.totalPages}
+        urlParamName='ordersPage'
         
         />
 
-    </section> */}
+    </section>
     {/* my events organized */}
     <section className='bg-primary-50 bg-dotted-pattern bg-contain bg-center py-5 md:py-10'>
         <div className='wrapper flex items-center justify-center sm:justify-between'>
@@ -55,10 +65,10 @@ const ProfilePage = async() => {
         data = {EventsOrganized?.data}
         emptyTitles= "No events have been organized yet. "
         emptyStateSubText = "Go ahead and create an event. "
-        collectionTitle = "My_Tickets"
+        collectionTitle = "Event_Organized"
         limit= {6}
-        page={1}
-        totalPages={2}
+        page={eventsPage}
+        totalPages={EventsOrganized?.totalPages}
         urlParamName='eventsPage'
         
         />

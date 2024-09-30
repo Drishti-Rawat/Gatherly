@@ -16,6 +16,15 @@ export interface IOrder {
     }
 }
 
+export type IOrderItem = {
+    _id: string
+    totalAmount: string
+    createdAt: Date
+    eventTitle: string
+    eventId: string
+    buyer: string
+  }
+
 const OrderSchema = new Schema({
     createdAt :{type:Date,default:Date.now},
     stripeId: { type: String, required: true,unique: true },

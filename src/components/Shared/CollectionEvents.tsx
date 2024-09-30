@@ -1,6 +1,7 @@
 import { Ievent } from '@/lib/database/models/event.model'
 import React from 'react'
 import EventCard from './EventCard'
+import Pagination from './Pagination'
 
 type CollectionProps = {
     data: Ievent[]
@@ -24,7 +25,7 @@ const CollectionEvents = ({
     totalPages=0,
     urlParamName
 }: CollectionProps) => {
-  console.log(limit,page,totalPages,urlParamName)
+  
 
   
   return (
@@ -46,6 +47,14 @@ const CollectionEvents = ({
             })
           }
         </ul>
+        {
+          totalPages>1 && (
+            
+            <Pagination urlParamName={urlParamName}  page={page} totalPages={totalPages}/>
+          )
+        }
+         {/* <Pagination urlParamName={urlParamName}  page={page} totalPages={totalPages}/> */}
+
        </div>
       ):
       (

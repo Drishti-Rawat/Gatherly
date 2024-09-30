@@ -100,8 +100,8 @@ const EventDetailPage = async ({ params: { id },searchParams }: SearchParamProps
         emptyStateSubText = "Come back later and create one!"
         collectionTitle = "All_Events"
         limit= {6}
-        page={1}
-        totalPages={2}
+        page={searchParams?.page as string}
+        totalPages={RelatedEvents?.totalPages}
       />
 
 

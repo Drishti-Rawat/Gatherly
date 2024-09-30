@@ -1,16 +1,25 @@
+import CategoryFilter from "@/components/Shared/CategoryFilter";
 import CollectionEvents from "@/components/Shared/CollectionEvents";
+import Search from "@/components/Shared/Search";
 import { Button } from "@/components/ui/button";
 import { getAllEvents } from "@/lib/actions/Event.action";
+import { SearchParamProps } from "@/types";
 import { auth } from "@clerk/nextjs/server";
 
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function Home() {
+export default async function Home({
+  searchParams}:SearchParamProps) {
+
+    const page = Number(searchParams?.page || 1)
+    const searchText = (searchParams?.query as string)||""
+    const category = (searchParams?.category as string)||""
+
   const All_events = await getAllEvents({
-    query: '',
-    category:'',
-    page: 1,
+    query: searchText,
+    category:category,
+    page: page,
     limit: 6
   })
   // console.log(All_events)
@@ -47,8 +56,8 @@ export default async function Home() {
         <h2 className="h2-bold">Trusted by Top Event Companies</h2>
 
         <div className="w-full flex flex-col gap-5 md:flex-row">
-          search
-          category filter
+          <Search/>
+          <CategoryFilter/>
 
         </div>
 
@@ -58,9 +67,8 @@ export default async function Home() {
         emptyStateSubText = "Come back later and create one!"
         collectionTitle = "All_Events"
         limit= {6}
-        page={1}
-        totalPages={2}
-        
+        page={page}
+        totalPages={All_events?.totalPages}
         />
       </section>
     </>
