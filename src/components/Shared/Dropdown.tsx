@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { ICategory } from "@/lib/database/models/category.model"
-import {  useEffect, useState } from "react"
+import { startTransition, useEffect, useState } from "react"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -74,7 +74,7 @@ const Dropdown = ({ value, onChangeHandler }: DropdownProps) => {
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
              
-              <AlertDialogAction  onClick={handleAddCategory}>Add</AlertDialogAction>
+              <AlertDialogAction  onClick={()=>startTransition(handleAddCategory)}>Add</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
