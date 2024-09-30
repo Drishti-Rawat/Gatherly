@@ -31,7 +31,9 @@ export const CheckoutOrder = async (order:CheckoutOrderParams) => {
             success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/profile`,
             cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
           });
-          redirect(session.url!);
+          console.log('Stripe session created:', session);
+          return session.url;
+
     } catch (error) {
         console.error('Error creating Stripe session:', error);
         throw error
@@ -48,6 +50,7 @@ export const createOrder = async (order:CreateOrderParams) => {
       event: order.eventId,
       buyer: order.buyerId,
     });
+    console.log(newOrder)
 
     return JSON.parse(JSON.stringify(newOrder));
         

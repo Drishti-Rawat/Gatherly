@@ -23,8 +23,8 @@ const Checkout = ({event,userId}:{event:Ievent, userId:string}) => {
           console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
         }
       }, []);
-    const onCheckout = async()=>{
-        // e.preventDefault()
+    const onCheckout = async(e: React.FormEvent)=>{
+      e.preventDefault(); // Prevent default form submission
         const order = {
             eventTitle: event.title,
             eventId: event._id,
@@ -33,12 +33,20 @@ const Checkout = ({event,userId}:{event:Ievent, userId:string}) => {
             buyerId: userId
           }
 
-        await CheckoutOrder(order)
+         try {
+           const sessionUrl = await CheckoutOrder(order);
+           if (sessionUrl) {
+               // Redirect to the Stripe checkout page
+               window.location.href = sessionUrl; // Redirect to the session URL
+           }
+         } catch (error) {
+          console.error('Checkout error:', error);
+         }
         
     }
 
   return (
-    <form action={onCheckout} method="post">
+    <form onSubmit={onCheckout}>
       <Button type="submit" role="link" size="lg" className="button sm:w-fit">
         {event.isFree ? 'Get Ticket' : 'Buy Ticket'}
       </Button>

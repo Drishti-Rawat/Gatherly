@@ -1,6 +1,8 @@
 import CollectionEvents from "@/components/Shared/CollectionEvents";
 import { Button } from "@/components/ui/button";
 import { getAllEvents } from "@/lib/actions/Event.action";
+import { auth } from "@clerk/nextjs/server";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -11,7 +13,12 @@ export default async function Home() {
     page: 1,
     limit: 6
   })
-  console.log(All_events)
+  // console.log(All_events)
+  // const {user}= useUser()
+  // console.log(user?.publicMetadata)
+  const {sessionClaims} = auth()
+  console.log("session claims",sessionClaims)
+ 
   return (
     <>
       <section className="bg-primary-50 bg-dotted-pattern bg-contain py-5 md:py-10">

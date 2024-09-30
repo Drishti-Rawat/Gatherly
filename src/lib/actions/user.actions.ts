@@ -20,6 +20,7 @@ export const createUser = async (user:CreateUserParams) => {
         
     } catch (error) {
         handleError(error)
+        console.error("Error creating user:", error);
     }
 }
 

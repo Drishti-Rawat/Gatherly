@@ -10,7 +10,7 @@ const ProfilePage = async() => {
     const userId = sessionClaims?.userid as string;
 
     const EventsOrganized = await getEventByUser({userId,page:1})
-    console.log("EventsOrganized",EventsOrganized)
+    // console.log("EventsOrganized",EventsOrganized)
   return (
     <>
     {/* my tickets */}
