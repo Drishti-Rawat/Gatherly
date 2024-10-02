@@ -35,7 +35,7 @@ export const CheckoutOrder = async (order:CheckoutOrderParams) => {
             success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/profile`,
             cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/`,
           });
-          console.log('Stripe session created:', session);
+          // console.log('Stripe session created:', session);
           return session.url;
 
     } catch (error) {
@@ -54,7 +54,7 @@ export const createOrder = async (order:CreateOrderParams) => {
       event: order.eventId,
       buyer: order.buyerId,
     });
-    console.log(newOrder)
+    // console.log(newOrder)
 
     return JSON.parse(JSON.stringify(newOrder));
         

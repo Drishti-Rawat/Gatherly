@@ -35,7 +35,7 @@ type EventFormProps = {
 
 const EventForm = ({ userId, type,event,eventId }: EventFormProps) =>{
   // console.log(event)
-  console.log(userId)
+  // console.log(userId)
   const [files, setFiles] = useState<File[]>([]);
   const { startUpload } = useUploadThing("imageUploader");
   const router = useRouter();
@@ -80,7 +80,7 @@ const EventForm = ({ userId, type,event,eventId }: EventFormProps) =>{
           path:'/profile'
         })
 
-        console.log("newEvent",newEvent)
+        // console.log("newEvent",newEvent)
 
         if(newEvent) {
           form.reset();
@@ -117,9 +117,9 @@ const EventForm = ({ userId, type,event,eventId }: EventFormProps) =>{
 
     }
 
-    console.log("uploadedImageUrl",uploadedImageUrl);
+    // console.log("uploadedImageUrl",uploadedImageUrl);
 
-    console.log(values);
+    // console.log(values);
   }
   return (
     <Form {...form}>

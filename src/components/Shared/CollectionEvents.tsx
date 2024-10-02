@@ -53,7 +53,7 @@ const CollectionEvents = ({
             <Pagination urlParamName={urlParamName}  page={page} totalPages={totalPages}/>
           )
         }
-         {/* <Pagination urlParamName={urlParamName}  page={page} totalPages={totalPages}/> */}
+         
 
        </div>
       ):

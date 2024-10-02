@@ -53,14 +53,14 @@ export async function POST(req: Request) {
   // Do something with the payload
   // For this guide, you simply log the payload to the console
   const { id } = evt.data;
-  console.log("id",id)
+  // console.log("id",id)
   const eventType = evt.type;
-  console.log("Webhook event data:", evt.data);
+  // console.log("Webhook event data:", evt.data);
 
   if (eventType === "user.created") {
     const { id, email_addresses, image_url, first_name, last_name, username } =
       evt.data;
-    console.log("Received user.created event:", evt.data);
+    // console.log("Received user.created event:", evt.data);
     const user = {
       clerkId: id,
       email: email_addresses[0].email_address,
@@ -71,7 +71,7 @@ export async function POST(req: Request) {
     };
 
     const newUser = await createUser(user);
-    console.log("User created in database:", newUser);
+    // console.log("User created in database:", newUser);
 
     if (newUser) {
       await clerkClient.users.updateUserMetadata(id, {
@@ -79,7 +79,7 @@ export async function POST(req: Request) {
           userid: newUser._id,
         },
       });
-      console.log("Clerk user metadata updated");
+      // console.log("Clerk user metadata updated");
     }
 
     return NextResponse.json(
@@ -96,7 +96,7 @@ export async function POST(req: Request) {
   if (eventType === "user.updated") {
     try {
       const { id, image_url, first_name, last_name, username } = evt.data;
-      console.log("Received user.created event:", evt.data);
+      // console.log("Received user.created event:", evt.data);
 
       const user = {
         username: username!,

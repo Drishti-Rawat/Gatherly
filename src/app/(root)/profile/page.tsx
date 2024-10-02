@@ -20,7 +20,7 @@ const ProfilePage = async({searchParams}:SearchParamProps) => {
 
     const orders = await getOrdersByUser({userId,page:1})
     const orderEvent = orders?.data.map((order:IOrder)=>order.event)||[]
-    console.log("orderEvent",orderEvent)
+    // console.log("orderEvent",orderEvent)
   return (
     <>
     {/* my tickets */}
