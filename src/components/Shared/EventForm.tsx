@@ -117,7 +117,7 @@ const EventForm = ({ userId, type,event,eventId }: EventFormProps) =>{
 
     }
 
-    // console.log("uploadedImageUrl",uploadedImageUrl);
+    console.log("uploadedImageUrl",uploadedImageUrl);
 
     // console.log(values);
   }
